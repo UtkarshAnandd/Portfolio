@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens. Change colours here and the whole site follows.
+ * Dark is the default; light mode kicks in via prefers-color-scheme.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #a1a1aa;
+  --border: #27272a;
+  --card: #111113;
+  --accent: #a3e635;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #fafafa;
+    --foreground: #18181b;
+    --muted: #52525b;
+    --border: #e4e4e7;
+    --card: #ffffff;
+    --accent: #4d7c0f;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/*
+ * Animation hooks (not used yet):
+ *  - [data-section="<id>"] marks each section
+ *  - [data-reveal] marks elements meant to fade/slide in on scroll
+ * Add motion here or with a client component later; respect reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
